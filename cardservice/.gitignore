@@ -1,0 +1,15 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/bin
+/build
+
+# Eclipse Files #
+.classpath
+.project
+.settings/
+/target/
+.springBeans
