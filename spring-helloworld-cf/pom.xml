@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-helloworld-cf</name>
+	<name>spring-basic-concepts</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
