@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringHelloworldCfApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("spring.config.name", "rituraj");
 		SpringApplication.run(SpringHelloworldCfApplication.class, args);
 	}
+
 }

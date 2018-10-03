@@ -1,0 +1,16 @@
+server:
+  port: 9090
+  name: tomcat
+
+my:
+  secret: ${random.value}
+  number: 
+    int: ${random.int}
+    less:
+      than:
+          ten: ${random.int(10)}
+    in:
+      range: ${random.int[1024,65536]}
+  bignumber: ${random.long}
+  uuid: ${random.uuid}
+    
