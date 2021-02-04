@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+.metadata/
+.gradle/
+RemoteSystemsTempFiles/
+Servers/
+.eclipse/
+
+
+

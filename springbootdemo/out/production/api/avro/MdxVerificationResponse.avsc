@@ -1,0 +1,79 @@
+{
+  "namespace": "avro",
+  "type": "record",
+  "name": "MdxVerificationResponse",
+  "fields": [{
+    "name": "GroupResultReasons",
+    "type": {
+      "type": "record",
+      "name": "GroupResultReasons",
+      "fields": [{
+        "name": "reasonCode",
+        "type": "string"
+      },
+        {
+          "name": "reasonText",
+          "type": "string"
+        },
+        {
+          "name": "additionalInfo",
+          "type": "string"
+        },
+        {
+          "name": "grade",
+          "type": "string"
+        }
+      ]
+    }
+  },
+    {
+      "name": "SystemErrors",
+      "type": {
+        "type": "record",
+        "name": "SystemErrors",
+        "fields": [{
+          "name": "applicationID",
+          "type": "string"
+        },
+          {
+            "name": "code",
+            "type": "string"
+          },
+          {
+            "name": "subcode",
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StatusMessages",
+      "type": {
+        "type": "record",
+        "name": "StatusMessages",
+        "fields": [{
+          "name": "code",
+          "type": "string"
+        },
+          {
+            "name": "subcode",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      }
+    }
+
+  ]
+}

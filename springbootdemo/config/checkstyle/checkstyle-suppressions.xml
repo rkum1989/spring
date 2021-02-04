@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+  "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+  "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+
+  <suppress files=".*generated.*" checks=".*"/>
+  <suppress checks=".*" files="CustomerDataImplTest.java"/>
+  <suppress checks=".*" files="DummyPropertiesTest.java"/>
+  <suppress checks=".*" files="IdentityAttributesImplTest.java"/>
+  <suppress checks=".*" files="PropertiesImplTest.java"/>
+  <suppress checks=".*" files="BusinessContextImplTest.java"/>
+  <suppress checks=".*" files="RequestDataImplTest.java"/>
+  <suppress checks=".*" files="BusinessContextImplTest.java"/>
+  <suppress checks=".*" files="PropertyImplTest.java"/>
+  <suppress checks=".*" files="PropertyNameImplTest.java"/>
+  <suppress checks=".*" files="EcprClientTest.java"/>
+  <suppress checks=".*" files="IdVerificationServiceTest.java"/>
+  <suppress checks=".*" files="IdVerificationService.java"/>
+  <suppress checks=".*" files="IdentityAttributesImpl.java"/>
+  <suppress checks=".*" files="VerifyIdentityService.java"/>
+  <suppress checks=".*" files="EcprConfigTest.java"/>
+  <suppress checks=".*" files="EcprClientTest.java"/>
+  <suppress checks=".*" files="RuleEngineTest.java"/>
+  <suppress checks=".*" files="RulesEvaluatorSampleApp.java"/>
+  <suppress checks=".*" files="RuleEngineConfigTest.java"/>
+  <suppress checks=".*" files="Constant.java"/>
+  <suppress checks=".*" files="EcprMapperTest.java"/>
+  <suppress checks=".*" files="Util.java"/>
+  <suppress checks=".*" files="UtilTest.java"/>
+  <suppress checks=".*" files="RulesMapperTest.java"/>
+  <suppress checks=".*" files="InitiatorInformation.java"/>
+  <suppress checks=".*" files="PropertyImplTest.java"/>
+  <suppress checks=".*" files="wfcontext2003callbackTest.java"/>
+  <suppress checks=".*" files="RuleEngineImplTest.java"/>
+  <suppress checks=".*" files="RulesServiceImplTest.java"/>
+  <suppress checks=".*" files="RuleInvokerImplTest.java"/>
+  <suppress checks=".*" files="ServiceInitializationExceptionTest.java"/>
+  <suppress checks=".*" files="SystemPropertiesResourceTest.java"/>
+  <suppress checks=".*" files="IdVerificationControllerTest.java"/>
+  <suppress checks=".*" files="VerificationMethodTest.java"/>
+  <suppress checks=".*" files="AttributesAcceptanceImplTest.java"/>
+  <suppress checks=".*" files="DomainNameInitializationTest.java"/>
+  <suppress checks=".*" files="RulesEngineIntegrationTest.java"/>
+  <suppress checks=".*" files="EcprIntegrationTest.java"/>
+  <suppress checks=".*" files="EcprLexisNexisClient.java"/>
+  <suppress checks=".*" files="LexisNexisMapper.java"/>
+  <suppress checks=".*" files="LexisNexisMapperTest.java"/>
+  <suppress checks=".*" files="NameTestClass.java"/>
+  <suppress checks=".*" files="ConfidenceLevel.java"/>
+  <suppress checks=".*" files="EcprLexisNexisClientTest"/>
+  <suppress checks=".*" files="EcprResponseImplTest"/>
+  <suppress checks=".*" files="avro/*"/>
+  <suppress checks=".*" files="FasaDeserializer"/>
+  <suppress checks=".*" files="KafkaProducerConfig"/>
+  <suppress checks=".*" files="KafkaProducer"/>
+  <suppress checks=".*" files="KafkaReceiverConfig"/>
+  <suppress checks=".*" files="KafkaTest"/>
+
+</suppressions>

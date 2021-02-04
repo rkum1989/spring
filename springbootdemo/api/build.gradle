@@ -1,0 +1,31 @@
+description 'Avro Code Generation Module'
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:0.9.1"
+    }
+}
+
+apply plugin: "com.commercehub.gradle.plugin.avro"
+dependencies {
+    compile "org.apache.avro:avro:1.8.1"
+}
+
+avro {
+    outputCharacterEncoding = "UTF-8"
+    stringType = "CharSequence"
+    createSetters = false
+    fieldVisibility = "PRIVATE"
+}
+
+task generateAvro(type: com.commercehub.gradle.plugin.avro.GenerateAvroJavaTask) {
+    source("src/main/resources/avro")
+    outputDir = file("src/main/java")
+}
+
+compileJava.dependsOn generateAvro

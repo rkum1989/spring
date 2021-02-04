@@ -1,0 +1,76 @@
+import org.jsonschema2pojo.InclusionLevel
+description 'MDX-SERVICE API Build'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.33'
+        classpath 'joda-time:joda-time:2.9.9'
+    }
+}
+
+apply plugin: 'jsonschema2pojo'
+
+repositories {
+    jcenter()
+}
+
+def bootRun() {
+    // Ensures IntelliJ can load resource files
+    addResources = false
+}
+
+dependencies {
+    //compile libraries.searj
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'javax.validation:validation-api:2.0.1.Final'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.4'
+    compile 'joda-time:joda-time:2.9.9'
+}
+configurations {
+    runtime.exclude group: "org.codehaus.mojo", module: "animal-sniffer-annotations"
+}
+
+ext {
+    if (!project.hasProperty('apiSourceDir')) {
+        apiSourceDir = null
+    } else {
+        apiSourceDir = "$apiSourceDir"
+    }
+
+    if (!project.hasProperty('apiTargetDir')) {
+        apiTargetDir = null
+    }
+    else {
+        apiTargetDir = "$apiTargetDir"
+    }
+    generatedJavaSourceDir = "src/main/java/"
+}
+
+clean {
+    delete generatedJavaSourceDir
+}
+
+
+jsonSchema2Pojo {
+    source = files("${projectDir}/src/main/resources/json")
+    targetDirectory = file("${generatedJavaSourceDir}")
+    targetPackage = 'json'
+    includeJsr303Annotations = true
+    includeConstructors = true
+    inclusionLevel = InclusionLevel.NON_EMPTY;
+    propertyWordDelimiters = ['_'] as char[]
+    annotationStyle = 'jackson2'
+    dateTimeType = "java.time.Instant"
+    dateType = "java.time.LocalDate"
+    timeType = "java.time.LocalTime"
+//  formatDates = true
+//  initializeCollections = false;
+}
+
+task publishApi(type: Copy) {
+    delete "${apiTargetDir}"
+    from "${apiSourceDir}"
+    into "${apiTargetDir}"
+}
+publishApi.onlyIf { apiSourceDir != null && apiTargetDir != null }

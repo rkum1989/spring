@@ -1,0 +1,16 @@
+description 'app'
+
+dependencies{
+    compile project(":common")
+    compile project(":data")
+    compile project(":domain")
+
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${spring_plugin_version}")
+
+    compile 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.33'
+    compileOnly 'com.google.code.findbugs:annotations:3.0.1'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.1'
+}
+
+
+

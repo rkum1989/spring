@@ -1,0 +1,170 @@
+buildscript {
+    ext {
+        spring_plugin_version = '1.5.10.RELEASE'
+        junitPlatformVersion = '1.0.0-M4'
+        junitJupiterVersion = '5.0.0-M4'
+        junitVersion = '4.12'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.junit.platform:junit-platform-gradle-plugin:$junitPlatformVersion")
+    }
+}
+
+allprojects {
+
+}
+
+subprojects {
+    if (!it.name.startsWith('config')) {
+        apply plugin: 'java'
+        apply plugin: 'pmd'
+        apply plugin: 'findbugs'
+        apply plugin: 'checkstyle'
+        apply plugin: 'jacoco'
+        apply plugin: 'org.junit.platform.gradle.plugin'
+
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        group 'com.mdx'
+        version '1.0-SNAPSHOT'
+
+        repositories {
+            mavenCentral()
+            jcenter()
+            mavenLocal()
+        }
+
+        jacoco {
+            toolVersion = "0.7.9"
+        }
+
+        configurations {
+            testAgent {
+                transitive = false
+            }
+        }
+
+        tasks.withType(JavaExec) {
+            if (it.name == 'junitPlatformTest') {
+                doFirst {
+                    jvmArgs "-javaagent:${configurations.testAgent.singleFile}=destfile=${project.buildDir.name}/jacoco/test.exec"
+                }
+            }
+        }
+
+        jacocoTestCoverageVerification {
+            violationRules {
+                rule {
+                    limit {
+                        minimum = 0.9
+                    }
+                }
+                rule {
+                    enabled = false
+                    element = 'CLASS'
+                    includes = ['com.mdx.*']
+
+                    limit {
+                        counter = 'LINE'
+                        value = 'TOTALCOUNT'
+                        maximum = 0.3
+                    }
+                }
+            }
+        }
+
+        check.dependsOn jacocoTestReport
+        //check.dependsOn jacocoTestCoverageVerification
+
+        pmd {
+            ignoreFailures = true
+            pmdTest.enabled=false
+            ruleSets = [file("${project.rootDir}/config/pmd/pmd.xml")]
+        }
+
+        checkstyle {
+            toolVersion = '6.19'
+            ignoreFailures = true
+            configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+            configProperties = [ "suppressionFile" : file("${project.rootDir}/config/checkstyle/suppressions.xml")]
+
+        }
+        checkstyleMain {
+            source ='src/main/java'
+        }
+        checkstyleTest {
+            source ='src/test/java'
+        }
+
+        findbugs {
+            toolVersion = "3.0.1"
+            findbugsTest.enabled=false
+            ignoreFailures = false
+            sourceSets=[sourceSets.main]
+            excludeFilter = file("$project.rootDir/config/findbugs/findbugs-suppressions.xml")
+            reportsDir = file("$project.buildDir/reports/findbugs")
+            effort = "max"
+        }
+
+        tasks.withType(FindBugs) {
+            reports {
+                xml.enabled false
+                html.enabled true
+            }
+        }
+
+        tasks.withType(Checkstyle) {
+            reports {
+                xml.enabled false
+                html.enabled true
+            }
+        }
+
+        tasks.withType(Pmd){
+            reports{
+                xml.enabled=false
+                html.enabled=true
+            }
+        }
+
+        dependencies {
+            compile("org.springframework.boot:spring-boot-starter-web:${spring_plugin_version}")
+            // JUnit Jupiter API and TestEngine implementation
+            testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+            testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+            //Only needed to run tests in an (IntelliJ)
+            testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
+            testCompile("junit:junit:${junitVersion}")
+            testCompile("org.springframework.boot:spring-boot-starter-test:${spring_plugin_version}")
+            testAgent("org.jacoco:org.jacoco.agent:0.7.9:runtime")
+
+        }
+    }
+}
+
+/*
+configure(subprojects - project(':config')) {
+    apply plugin: 'java'
+    apply plugin: 'pmd'
+    apply plugin: 'findbugs'
+    apply plugin: 'checkstyle'
+    apply plugin: 'jacoco'
+    apply plugin: 'org.junit.platform.gradle.plugin'
+}
+*/
+
+/*project(':config') {
+    dependencies {
+        //compile project(':app')
+    }
+}*/
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4.1'
+    jarFile = "${project.rootDir}/gradle/wrapper"
+}
+
+

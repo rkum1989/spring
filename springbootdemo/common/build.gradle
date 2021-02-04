@@ -1,0 +1,12 @@
+description 'Utility module which other sub-projects depend upon'
+dependencies {
+    compile project(":api")
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
+    compileOnly 'com.google.code.findbugs:annotations:3.0.1'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.1'
+
+    testCompileOnly 'com.google.code.findbugs:annotations:3.0.1'
+    testCompileOnly 'com.google.code.findbugs:jsr305:3.0.1'
+
+}

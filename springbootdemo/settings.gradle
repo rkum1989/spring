@@ -1,0 +1,11 @@
+rootProject.name = 'springbootdemo'
+
+include 'bdd'
+include 'api'
+include 'app'
+include 'schemas'
+include 'data'
+include 'webapp'
+include 'domain'
+include 'common'
+include 'config'

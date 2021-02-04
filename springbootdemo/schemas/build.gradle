@@ -1,0 +1,50 @@
+
+description 'Schemas Code Generation Module'
+ext {
+    schemaDir = "src/main/resources"
+    outputDir = "src/main/java/com/mdx/microservice/data/domain"
+    schemaFiles = [
+            "${schemaDir}/com/mdx/book/bookSchema.xsd",
+            "${schemaDir}/com/mdx/employee/employee.xsd",
+            //"${schemaDir}/com/mdx/service/entity/message/Message.xsd"
+    ]
+}
+
+dependencies {
+    compile "com.sun.xml.bind:jaxb-xjc:2.1.13"
+}
+task generate {
+    description 'Generates Java sources from XML schemas.'
+    group = "build"
+    inputs.dir file(schemaDir)
+    outputs.dir file(outputDir)
+    doLast {
+        mkdir outputDir
+        javaexec {
+            main = 'com.sun.tools.xjc.XJCFacade'
+            classpath = configurations.compile
+            args '-nv', '-quiet', '-d', outputDir
+            args schemaFiles
+        }
+    }
+}
+
+task unzip(type: Copy) {
+    from zipTree("${schemaDir}/schemas.zip")
+    into schemaDir
+}
+
+clean {
+    delete outputDir
+    //delete "${schemaDir}/com"
+}
+
+compileJava.dependsOn generate
+generate.dependsOn unzip
+
+jar {
+    manifest {
+        attributes("Implementation-Title": 'MDX Service Generated Schemas')
+    }
+}
+

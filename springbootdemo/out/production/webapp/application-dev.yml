@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform : org.hibernate.dialect.MySQLDialect
+    generate-ddl: true
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    driverClassName: com.mysql.jdbc.Driver
+    username: rituraj
+    password: rituraj
+
+server:
+  port: 9090
+
+application:
+    async:
+        core-pool-size: 10
+        max-pool-size: 50
+        queue-capacity: 10000
+
+logging:
+  level:
+    org:
+      springframework:
+        web: ERROR
+      hibernate: ERROR
+
+  pattern:
+    console: "%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n"

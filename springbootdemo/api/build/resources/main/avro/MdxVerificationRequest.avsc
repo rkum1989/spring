@@ -1,0 +1,29 @@
+{
+  "namespace": "avro",
+  "type": "record",
+  "name": "MdxVerificationRequest",
+  "fields": [{
+    "name": "fullname",
+    "type": {
+      "type": "string",
+      "name": "groupId",
+      "fields": [{
+        "name": "deptId",
+        "type": "string"
+      },
+        {
+          "name": "phone",
+          "type": "string"
+        }
+      ]
+    }
+  },
+    {
+      "name" : "policyId",
+      "type" : "string"
+    },
+    {
+      "name" : "MdxGroupMethod",
+      "type" : "string"
+    }]
+}
