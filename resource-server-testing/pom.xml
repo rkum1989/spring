@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.12.RELEASE</version>
+	</parent>
+	
+	<groupId>com.mdx.resource.server</groupId>
+	<artifactId>resource-server-testing</artifactId>
+	<version>1.0.1</version>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<spring-security-oauth2.version>2.2.0.RELEASE</spring-security-oauth2.version>
+		<spring-security.version>5.0.4.RELEASE</spring-security.version>
+	</properties>
+
+	<dependencies>
+		<!-- Bootstrap -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<!-- OAuth 2.0 -->
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+		</dependency>
+		<!-- Json Web Tokens -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+		</dependency>
+		<!-- Testing security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <!-- <dependency>
+        	<groupId>com.mdx.oauth.common</groupId>
+        	<artifactId>oauth-common</artifactId>
+			<version>1.0.0.SNAPSHOT</version>
+      	</dependency> -->
+        <dependency>
+        	<groupId>com.google.code.gson</groupId>
+        	<artifactId>gson</artifactId>
+      	</dependency>
+		<!-- Read RSA keys -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+	</dependencies>
+	
+    <build>
+        <finalName>resource-server-testing</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                     <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <outputDirectory>${project.build.directory}/war</outputDirectory>
+                        <warName>${project.name}</warName>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <mainClass>com.mdx.auth.microservices.AuthorizationService</mainClass>
+                    </configuration>
+                </plugin>
+         		<plugin>
+            		<artifactId>maven-failsafe-plugin</artifactId>
+            		<executions>
+                		<execution>
+                    		<goals>
+                        		<goal>integration-test</goal>
+                        		<goal>verify</goal>
+                    		</goals>
+                		</execution>
+            		</executions>
+       			 </plugin>
+            </plugins>
+          </pluginManagement>
+    </build>
+
+    <!-- repositories -->
+	<repositories>
+		<repository>
+		    <id>spring-milestones</id>
+		    <url>http://repo.spring.io/libs-milestone/</url>
+	    </repository>
+    </repositories>
+
+
+</project>

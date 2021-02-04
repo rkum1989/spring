@@ -1,0 +1,4 @@
+com\mdx\resource\server\MyApp.class
+com\mdx\resource\server\config\ResourceServerConfiguration.class
+com\mdx\resource\server\controller\MyController.class
+com\mdx\resource\server\config\WebSecurityConfig.class
